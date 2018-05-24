@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<title>To-Do List</title>
+<body>
+    <h1>To-Do List</h1>
+    <br>
+    <input type="text" id='txtbox' placeholder="Enter Your Task">
+    <br>
+    <input type="button" id="btn" value="Add Task" onclick="addTask()">
+    <input type="button" id="clr" value="Clear List" onclick="cl()">
+    <p id='para'></p>
+
+    <script>
+        var tasks=[{checkbox:'', lab:'' }]
+        var x=0
+        
+        function addTask()
+        {
+            var t=document.getElementById("txtbox").value
+            if(t=='')
+            {
+                alert("Please Enter Task")
+            }
+            else
+            {
+                show(t)
+                //console.log(tasks[x].checkbox.id+" "+tasks[x].lab.textContent)
+                x++
+                document.getElementById("txtbox").value=null
+            }
+        }
+
+        function show(task)
+        {
+            var checkbx=document.createElement('input')
+            checkbx.type = "checkbox"
+            checkbx.value = task
+            checkbx.id = "checkbox"+x
+            checkbx.onclick=function()
+            {
+                //console.log("check strike")
+                if(this.checked==true)
+                    {
+                        this.nextElementSibling.style.setProperty("text-decoration", "line-through")
+                        //console.log("content striked")
+                    }
+                else
+                    {
+                        this.nextElementSibling.style.textDecoration='none'
+                        //console.log("content unstriked")
+                    }
+            }
+            //console.log("checkbox created")
+        
+            var lb = document.createElement('label')
+            lb.htmlFor = "checkbox"+x;
+            lb.appendChild(document.createTextNode(task))
+            //console.log("label created")
+
+            tasks[x]={checkbox:checkbx, lab:lb}
+            //console.log("task added")
+
+            var space=document.createElement('br')
+
+            document.getElementById("para").appendChild(tasks[x].checkbox)
+            document.getElementById("para").appendChild(tasks[x].lab)
+            document.getElementById("para").appendChild(space)
+        }
+
+        function cl()
+        {
+            tasks=[{checkbox:'', lab:''}]
+            var pnode=document.getElementById("para")
+            while(pnode.firstChild)
+                pnode.removeChild(pnode.firstChild)
+        }
+
+    </script>
