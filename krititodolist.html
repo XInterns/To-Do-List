@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<form id="myForm" name="To Do List">
+
+<input type="text" name="enter" id="enter" placeholder="Please Enter Task" ><br>
+<button id="add" type="button" value="1" onclick="clr()">ADD TASK</button>
+ 
+</form>
+
+<h4> Today's Tasks</h4>
+<p id="p">
+</p>
+
+<br></br>
+<hr>
+
+<h4> Tasks Completed</h4> 
+<p id="p1">
+</p>
+
+<script>
+
+var z,d,checkbox,data,node,li,textnode;
+var i=0
+var tlist= [{checkb:"",task:""}];
+
+function clr()
+{
+    data=document.getElementById("enter").value;
+
+    var ch = document.createElement("INPUT");
+    ch.setAttribute("type", "checkbox");
+    ch.setAttribute("id", i);
+    ch.onclick= function ()
+    {
+   
+        if(this.checked == true)
+        {
+            //console.log("CHECKED");
+            z = this.nextElementSibling.style.setProperty('text-decoration', 'line-through');
+
+            document.getElementById("p1").appendChild(ch);
+            document.getElementById("p1").appendChild(x);
+            document.getElementById("p1").appendChild(y);
+        }
+
+        else
+        {
+            //console.log("UNCHECKED");
+            z = this.nextElementSibling.style.setProperty('text-decoration','none');
+        
+            document.getElementById("p").appendChild(ch);
+            document.getElementById("p").appendChild(x);
+            document.getElementById("p").appendChild(y);
+        }
+
+    }
+
+    var x = document.createElement("LABEL");
+    var t = document.createTextNode(data);
+    x.setAttribute("id", i);    
+    x.appendChild(t);
+
+    var y = document.createElement("BR");
+    
+    document.getElementById("p").appendChild(ch);
+    document.getElementById("p").appendChild(x);
+    document.getElementById("p").appendChild(y);
+    
+    tlist= [{checkb:ch,task:x}];
+    
+    i++;
+    
+    document.getElementById("enter").value="";
+        
+}
+
+</script>
+
+</body>
+</html>
