@@ -1,0 +1,59 @@
+<html>
+<head>
+<title>Todo List</title>
+</head>
+<script>
+    var assign_id=1;
+    var box_id='i';
+    var span_id='s';
+    var task_list=[];
+    var task_status=[];  //1 denotes task done, 0 denotes task is incomplete
+ function add()
+ {
+     box_id='i'+assign_id;
+     span_id='s'+assign_id;
+     var task=document.getElementById('text').value;
+     if(task=="")
+        return ;
+     task_list[assign_id-1]=task;
+     task_status[assign_id-1]=0;
+     var box=document.createElement('input');
+     box.setAttribute('type','checkbox');
+     box.setAttribute('id',box_id);
+     var strik="strike("+assign_id+")";
+     box.setAttribute('onclick',strik);
+     box.setAttribute('value','unchecked');
+     var di=document.getElementById('p');
+     di.appendChild(box);
+     var tex=document.createElement('span');
+     tex.setAttribute('id',span_id);
+     tex.innerHTML=task+"<br>";
+     di.appendChild(tex);
+     assign_id++;
+     document.getElementById('text').value="";
+ }  
+ function strike(s)
+ {
+     var id_box='i'+s;
+     var id_span='s'+s;
+     var y=document.getElementById(id_box).value;
+     if(y=='checked'){
+        document.getElementById(id_span).innerHTML=task_list[s-1]+"<br>";
+        document.getElementById(id_box).value='unchecked';
+        task_status[assign_id-1]=0;
+     }
+    else{
+        var x=document.getElementById(id_span).innerHTML; 
+        x="<strike>"+x+"</strike>";
+        document.getElementById(id_span).innerHTML=x;
+        document.getElementById(id_box).value='checked';
+        task_status[assign_id-1]=1;
+        }
+ } 
+</script>
+<body>
+        <input type='text' id='text' value="" >
+        <input type='button' id='merg' name='add' value='Add' onclick="add()">
+        <div id='p'></div>
+</body>
+</html>
