@@ -1,0 +1,80 @@
+<html>
+    <head>
+        <title>To-DO List</title>
+    </head>
+    <style>
+        .strike {
+            text-decoration: line-through;
+        }
+    </style>
+    <script>
+        
+        n=0;
+
+
+        function addElement()
+        {
+            var item=document.getElementById("myInput").value;
+            if(item==""){
+                alert("Enter task");
+            }
+            
+            
+            var chkbox=document.createElement('input');
+            chkbox.type= "checkbox";
+            chkbox.id="chk"+n;
+            
+            //console.log(chkbox.id);
+
+            var li=document.createElement("li");
+
+            var spn=document.createElement('span');
+            spn.innerHTML=item
+            spn.id="sp"+n;
+            console.log(spn.innerHTML)
+
+            // var tnode=document.createTextNode(item);//(//"<input type='checkbox' value='unchecked' id='"+cid+"'/> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"+item);
+            // tnode.id="tn"+n;
+
+            chkbox.onclick=function(){
+                if(this.checked==true){
+                    console.log(this.nextElementSibling);
+                    var x= this.nextElementSibling;
+                    console.log(x);
+                    this.nextElementSibling.style.textDecoration='line-through';
+                                    }
+                else{
+                    this.nextElementSibling.style.textDecoration='none'; 
+                }
+
+
+            }
+    
+            
+
+          // console.log("hellotn"+n);
+           //console.log(tnode.id)
+            li.appendChild(chkbox);
+            li.appendChild(spn);
+
+           // li.appendChild(tnode);
+
+            
+            n++;
+
+
+          var ul = document.getElementById("list").appendChild(li);
+
+           
+
+            document.getElementById("myInput").value="";
+        }
+    </script>
+    <body>
+        <input type="text" id="myInput" placeholder="Enter Task..."/>
+        <input type="button" id="addbtn" value="Add" onclick="addElement()"/>
+        <ul id="list"></ul>
+
+
+    </body>
+</html>
