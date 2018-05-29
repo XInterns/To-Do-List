@@ -1,0 +1,66 @@
+<html>
+<head>
+<title>Todo List</title>
+</head>
+<script>
+    var assign_id=1;
+    var box_id='i';
+    var span_id='s';
+    var task_list=[];
+    var task_status=[];  //1=task done ; 0=task incomplete
+ function addTask()
+ {
+     box_id='i'+assign_id;
+     span_id='s'+assign_id;
+     var task=document.getElementById('txt').value;
+     if(task=="")
+        {alert("Enter some value!!!");
+        return;
+        }
+     task_list[assign_id-1]=task;
+     task_status[assign_id-1]=0;
+     var box=document.createElement('input');
+     box.setAttribute('type','checkbox');
+     box.setAttribute('id',box_id);
+     var strike1="strike("+assign_id+")";
+     box.setAttribute('onclick',strike1);
+     box.setAttribute('value','unchecked');
+     var di=document.getElementById('p');
+     di.appendChild(box);
+     var tex=document.createElement('span');
+     tex.setAttribute('id',span_id);
+     tex.innerHTML=task+"<br>";
+     di.appendChild(tex);
+     assign_id++;
+     document.getElementById('txt').value="";
+ }  
+ function strike(s)
+ {
+     var id_box='i'+s;
+     var id_span='s'+s;
+     var y=document.getElementById(id_box).value;
+     if(y=='checked'){
+        document.getElementById(id_span).innerHTML=task_list[s-1]+"<br>";
+        document.getElementById(id_box).value='unchecked';
+        task_status[assign_id-1]=0;
+     }
+    else{
+        var x=document.getElementById(id_span).innerHTML; 
+        x="<strike>"+x+"</strike>";
+        document.getElementById(id_span).innerHTML=x;
+        document.getElementById(id_box).value='checked';
+        task_status[assign_id-1]=1;
+        }
+ } 
+</script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<body>
+        <div class="container">
+        <h1>MY TO-DO LIST</h1>
+        </div>
+        <h4>Task:</h4>
+        <input type='text' id='txt' value="" placeholder="Write your task for today">
+        <input type='button' id='merg' name='add_task' value='Add_task' onclick="addTask()" class="btn btn-primary">
+        <div id='p'></div>
+</body>
+</html>
